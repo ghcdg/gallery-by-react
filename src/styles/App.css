@@ -25,32 +25,33 @@ html,body{
   overflow: hidden;
   background-color: #ccc;
 
-  @at-root {
-      .img-figure{
-        //position:absolute;
-        width: 320px;
-        height: 360px;
-        margin:0;
-        padding: 40px;
 
-        background-color: #ffffff;
-        box-sizing: border-box;
-      }
-      figcaption{
-        text-align: center;
-
-        .img-title{
-          margin: 20px,0,0,0;
-          color: #a7a0a2;
-          font-size: 16px;
-        }
-      }
-  }
 
 }
 /* image --end */
 
-/* 放在此处,突出它与img-sec的层次关系,但多层层级导致的性能和可移植性问题,使用Sass at-root指令 使样式块在文档的根目录,即与img-sec同一层 */
+/* 放在此处,突出它与img-sec的层次关系,但多层层级导致的性能和可移植性问题,
+使用Sass at-root指令 使样式块在文档的根目录,即与img-sec同一层*/
+.img-sec .img-figure{
+  position:absolute;
+  width: 320px;
+  height: 360px;
+  margin:0;
+  padding: 40px;
+
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.img-sec figcaption{
+  text-align: center;
+}
+
+figcaption .img-title{
+  margin: 20px,0,0,0;
+  color: #a7a0a2;
+  font-size: 16px;
+}
 
 /* controller --start*/
 .controller-nav{
