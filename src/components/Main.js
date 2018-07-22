@@ -233,8 +233,7 @@ class AppComponent extends React.Component {
 
   render() {
 
-    var controllerUnits = [],imgFigures = [];
-
+    var controllerUnits = [],imgFigures = [];//分别存储控制单元和图片
 
     //遍历并图片信息并传入给<ImgFigure/>组件,将每个组件都添加到数组ImgFigues中
     imageDatas.forEach(function(value,index){
@@ -249,10 +248,17 @@ class AppComponent extends React.Component {
         }
       }
 
+      //ImgFigure组件获取相关信息
       imgFigures.push(<ImgFigure ref={'imgFigure'+index}
-       arrange={this.state.imgsArrangeArr[index]} key={index}
+       key={index} arrange={this.state.imgsArrangeArr[index]}
        data={value} inverse={this.inverse(index)} center={this.center(index)} />);
+
+      //Controller组件获取相关的信息
+      controllerUnits.push(<ControllerUnits key={index} arrange={this.state.imgsArrangeArr[index]}
+      inverse={this.inverse(index)} center={this.center(index)} />);
+
     }.bind(this));
+
 
     return (
       <section className="stage" ref="stage">
@@ -301,7 +307,7 @@ class ImgFigure extends React.Component{
     }
     //设置中心图片的zIndex值得数量级10的1次方 避免被其他图片遮挡
     if(this.props.arrange.isCenter){
-      styleObj.zIndex=11;
+      styleObj.zIndex=111;
     }
 
     //如果props属性中指定了这张图片的旋转角度，则使用该旋转角度信息
@@ -313,9 +319,9 @@ class ImgFigure extends React.Component{
     }
 
     var imgFigureClassName = 'img-figure';
-        imgFigureClassName += this.props.arrange.isInverse ? ' is-inverse' : '';
+        imgFigureClassName += this.props.arrange.isInverse ? ' is-inverse' : '';//多个类名之间要有空格
         
-    return(
+      return(
         //显示单张图片的相关信息
         <figure className={imgFigureClassName} style={styleObj}
         onClick={(e)=>this.handleClick(e)} >
@@ -324,11 +330,46 @@ class ImgFigure extends React.Component{
           />
           <figcaption>
             <h2 className="img-title">{this.props.data.title}</h2>
-            <div className="img-back" onClick={(e)=>this.handleClick(e)}>
-              <p>{this.props.data.desc}</p>
+            <div className='img-back' onClick={(e)=>this.handleClick(e)}>
+            <p>{this.props.data.desc}</p>
             </div>
           </figcaption>
         </figure>
+    );
+  }
+}
+
+
+
+//类 控制组件
+class ControllerUnits extends React.Component{
+
+  handleClick(e){
+    //如果当前按钮在中心分区 则翻转图片 否则对应图片移动到中心分区
+    if(this.props.arrange.isCenter){
+      this.props.inverse();
+    }
+    else{
+      this.props.center();
+    }
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  render(){
+    var controllerUnitClassName='controller-unit';
+
+    //如果图片位于中心分区 按钮显示对应居中状态
+    if(this.props.arrange.isCenter){
+      controllerUnitClassName+=' is-center';//多个类名之间要有空格
+      //如果图片被翻转 南牛显示对应翻转状态
+      if(this.props.arrange.isInverse){
+        controllerUnitClassName+=' is-inverse';//多个类名之间要有空格
+      }
+    }
+
+    return(
+        <span className={controllerUnitClassName} onClick={(e)=>this.handleClick(e)}></span>
     );
   }
 }

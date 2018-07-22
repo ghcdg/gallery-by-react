@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "iconsArrow"; /* 定义字体名称 */
+  src: url("../fonts/icons/turn-arrow.eot") format("embedded-opentype"),
+  url("../fonts/icons/turn-arrow.woff") format("woff"),
+  url("../fonts/icons/turn-arrow.ttf") format("truetype"),
+  url("../fonts/icons/turn-arrow.svg") format("svg");
+}
+
 html,body{
   width: 100%;
   height: 100%;
@@ -15,7 +23,7 @@ html,body{
   position: relative;
 
   width: 100%;
-  height: 680px;
+  height: 600px;
 }
 /* stage-- end */
 
@@ -28,17 +36,17 @@ html,body{
   overflow: hidden;
   background-color: #ccc;
 
-  perspective: 1800px;
+  perspective: 1800px; /* 定义 3D 元素距视图的距离，以像素计 该元素的子元素获得3D透视效果 效果的距离是1800px */
 
   /**
    *放在此处,突出它与img-sec的层次关系,但多层层级导致的性能和可移植性
    *问题,使用Sass at-root指令 使样式块在文档的根目录,即与img-sec同一层 
    */
   @at-root {
-      .img-figure{
+      .img-figure{ /* 设置图片的样式属性*/
         position:absolute;
-        width: 320px;
-        height: 360px;
+        width: 320px; 
+        height: 360px; 
 
         margin:0;
         padding: 40px;
@@ -46,24 +54,25 @@ html,body{
         
         cursor: pointer;
         box-sizing: border-box;
-        transform-style: preserve-3d; /*3D效果*/
+        transform-style: preserve-3d; /*该元素的子元素保留3D 转换 */
         transform-origin: 0 50% 0;/* 三个值分别代表：x y z (默认值 50% 50% 0) 旋转中心默认在图形平面中的图形的中心位置 */
         transition: transform 0.6s ease-in-out,left 0.6s ease-in-out,top 0.6s ease-in-out;
 
-        //&表示与img-figure同级的类名
+        //&表示is-inverse与img-figure同一层 即类似于 className="img-figure is-inverse"
         &.is-inverse{
-          transform: translateX(320px) rotateY(180deg) ; /* transform: translate(320px) rotateY(180deg */
+          transform: translate(320px) rotateY(180deg) ; /* transform: translateX(320px) rotateY(180deg) */
         }
+
       }
 
       figcaption{
         text-align: center;
 
-        .img-title{
-          margin:20px 0 0 0;
-  
+        //表示在<figcaption>标签范围内的 className="img-title"的元素
+        .img-title{ 
+          margin:20px 0 0 0; 
           color:#a7a0a2;
-          font-size: 16px;
+          font-size: 16px;    
         }
   
         .img-back {
@@ -75,17 +84,16 @@ html,body{
           height: 100%;
           padding: 50px 40px;
     
-  
           color: #a7a0a2;
           font-size: 22px;
           line-height: 1.25;
           text-align: left;
   
           background-color: #fff;
-  
           box-sizing: border-box;
+          transform-style: preserve-3d;
           transform: rotateY(180deg) translateZ(1px);
-          backface-visibility: hidden;
+          backface-visibility:hidden;
 
           p{
             margin:0;
@@ -97,18 +105,57 @@ html,body{
 }
 /* image --end */
 
+
 /* controller --start*/
 .controller-nav{
   position: relative;
   left:0;
   bottom: 30px;
-  /*
-    设置导航图片的zIndex值的数量级为10的2次方
-    设置中心图片的zIndex值得数量级10的1次方
-    这样中心图片就会在其他图片前面不会被遮挡
-  */
+
+  /* 设置导航图片的zIndex值的数量级为10的2次方 设置中心图片的zIndex值得数量级10的1次方 这样中心图片就会在其他图片前面不会被遮挡 */
   z-index: 101; 
   width: 100%;
   text-align: center;
+
+  @at-root{
+    .controller-unit{
+      display: inline-block;
+      margin: 0 5px;
+      width: 30px;
+      height: 30px;
+
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #aaa;
+      border-radius: 50%;
+
+      transition: transform 0.6s ease-in-out, background-color 0.3s;
+      transform: scale(0.5); /* 默认大小为原来的 0.5倍 */
+
+      //&表示了is-center与.controller-unit同一层 类似于 className="controller-unit is-center"
+      &.is-center{
+        background-color: #888;
+        transform: scale(1); /* 当前中心舞台图片大小为原来的 1 倍 */
+        
+         /* 伪元素 在 className="is-center"的元素后面添加对应的content内容 这里以为是iconfont所有会显示在元素上面*/
+        &::after{
+          content: "\e600"; /* 箭头图标的unicode 更多信息查看 http://www.iconfont.cn -帮助-代码应用*/
+            color: #fff;
+            font-family: "iconsArrow";
+            font-size: 80%;
+            line-height: 30px;     
+            
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        &.is-inverse{
+          background-color: #555;
+          transform: rotateY(180deg);
+        }
+      }
+    }
+  }
 }
 /* controller --end*/
