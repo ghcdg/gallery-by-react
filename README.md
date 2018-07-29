@@ -18,10 +18,10 @@ gallery project by reac
 
 5、打开浏览器，在地址栏输入：http://localhost:8000/ 或 http://localhost:8000/webpack-dev-server/ 查看项目效果
 
-# 注：
+## 注：
 
 项目中的dist文件夹是已经打包好的项目：下载项目后直接打开dist文件中的index.html也可以查看效果【index.html和assets为打包后的文件】
 
-# 项目上传
+## 项目上传
 
 使用响应的git命令上传项目，使用 git subtree push --prefix dist origin gh-pages 命令将 dist 文件推送到 gh-pages 分支即可在线查看demo 
