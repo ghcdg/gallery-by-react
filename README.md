@@ -3,10 +3,11 @@ gallery project by reac
 
 ### 在线效果展示：Demo: https://www.donglixia.club/gallery-by-react/
 
-# 说明
+### 说明
 
+技术：yeoman、webpack、sass等
 
-## 项目下载以运行
+### 项目下载以及运行
 1、下载项目: 使用git命令：git clone git@github.com:ghcdg/gallery-by-react.git     或者 git clone https://github.com/ghcdg/gallery-by-react.git 进行下载
 
 2、打开命令提示符窗口 cmd：进入该项目目录（即 gallery-by-react 目录中）
@@ -18,10 +19,20 @@ gallery project by reac
 
 5、打开浏览器，在地址栏输入：http://localhost:8000/ 或 http://localhost:8000/webpack-dev-server/ 查看项目效果
 
-## 注：
+### 项目构建
 
-项目中的dist文件夹是已经打包好的项目：下载项目后直接打开dist文件中的index.html也可以查看效果【index.html和assets为打包后的文件】
+1、使用yeoman搭建项目框架（yeoman安装使用详情可到官网查看）
 
-## 项目上传
+2、下载项目生成器：项目使用 react-webpack 构建（可在github搜索并按照相关提示安装使用）
 
-使用响应的git命令上传项目，使用 git subtree push --prefix dist origin gh-pages 命令将 dist 文件推送到 gh-pages 分支即可在线查看demo 
+3、在github上新建一个仓库（此处仓库名为：gallery-by-react）,下载项目后使用命令：yo react-webpack gallery-by-react （命令分别为：yeoman命令   项目生成器   项目名称）来生成项目,项目生成过程中的设置可结合自身需要选择（如本项目过程中会只用sass，在选择的时候就选sass），否则默认即可
+
+4、项目生成后，可根据实际需要修改，目录结构、文件配置等可查看对应的官网，以适应实际开发需求
+
+### 项目上传
+
+使用相应的git命令上传项目后，再使用 git subtree push --prefix=dist origin gh-pages 命令将 dist 文件推送到 gh-pages 分支即可在线查看demo 
+
+### 注：
+项目中的dist文件夹是已经打包好的项目目录:下载后可直接打开dist文件的index.html查看效果【index.html和assets为打包后最终生成的文件】 
+
