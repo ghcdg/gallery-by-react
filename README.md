@@ -7,6 +7,9 @@ gallery project by react
 
 工具、框架：yeoman、webpack、react、sass等
 
+### 项目内容
+图片画廊 图片位置随机停留,点击图片或下方的图标对应的图片会展示在正中央，点击中心的图片或当前图片下方的图标可翻转图片
+
 ### 项目下载以及运行
 1、下载项目: 使用git命令：git clone git@github.com:ghcdg/gallery-by-react.git     或者 git clone https://github.com/ghcdg/gallery-by-react.git 进行下载
 
