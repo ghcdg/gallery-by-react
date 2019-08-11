@@ -1,7 +1,7 @@
 # gallery-by-react
 gallery project by react
 
-### 在线效果展示：Demo: https://www.donglixia.club/gallery-by-react
+### 在线效果展示：Demo: https://ghcdg.github.io/gallery-by-react/
 
 ### 说明
 
